@@ -1,12 +1,18 @@
 using UnityEngine;
+using UnityEngine.UI;
+
 public class EnemyScript : MonoBehaviour
 {
-    public GameObject[] enemy;
-    public float SpawnEnemyDuration;
-    public float KillEnemyDuration;
+    [SerializeField] private GameObject[] enemy;
+    [SerializeField] private float SpawnEnemyDuration;
+    [SerializeField] private float KillEnemyDuration;
+    [SerializeField] private Text updateScore;
+
+    public bool isEnemyDestroy;
+    public int score = 0;
+
     private int currentIndex;
     private float elapsedTime = 0f;
-    public bool isEnemyDestroy;
 
     void Update()
     {
@@ -32,5 +38,7 @@ public class EnemyScript : MonoBehaviour
                 enemy[currentIndex].SetActive(false);
             }
         }
+
+        updateScore.text = score.ToString();
     }
 }

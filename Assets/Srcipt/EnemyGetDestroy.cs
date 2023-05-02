@@ -12,7 +12,10 @@ public class EnemyGetDestroy : MonoBehaviour
         if (other.gameObject.CompareTag("Player"))
         {
             enemyScript.isEnemyDestroy = true;
+            enemyScript.score++;
+
             gameObject.SetActive(false);
+            Destroy(other.gameObject);
         }
     }
 }
