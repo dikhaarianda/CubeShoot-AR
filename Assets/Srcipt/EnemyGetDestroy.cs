@@ -2,6 +2,7 @@ using UnityEngine;
 
 public class EnemyGetDestroy : MonoBehaviour
 {
+    [SerializeField] private GameObject effect;
     private EnemyScript enemyScript;
 
     private void Start() {
@@ -15,6 +16,7 @@ public class EnemyGetDestroy : MonoBehaviour
             enemyScript.score++;
 
             gameObject.SetActive(false);
+            Instantiate(effect, transform.position,Quaternion.identity);
             Destroy(other.gameObject);
         }
     }
