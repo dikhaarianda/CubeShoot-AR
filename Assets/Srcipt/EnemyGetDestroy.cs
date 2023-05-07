@@ -14,6 +14,7 @@ public class EnemyGetDestroy : MonoBehaviour
         {
             enemyScript.isEnemyDestroy = true;
             enemyScript.score++;
+            enemyScript.EnemyDestroy.Play();
 
             gameObject.SetActive(false);
             Instantiate(effect, transform.position,Quaternion.identity);

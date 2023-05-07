@@ -6,6 +6,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private GameObject[] enemy;
     [SerializeField] private GameObject GameOverUI;
     [SerializeField] private GameObject ImageTarget;
+
     [SerializeField] private float SpawnEnemyDuration;
     [SerializeField] private float KillEnemyDuration;
     [SerializeField] private Text updateScore;
@@ -18,8 +19,9 @@ public class EnemyScript : MonoBehaviour
     private int currentIndex;
     private int previousIndex;
     private int highScore;
-    public int score;
 
+    public AudioSource EnemyDestroy;
+    public int score;
     public bool isEnemyDestroy;
 
     private void Start() {

@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 [AddComponentMenu("Nokobot/Modern Guns/Simple Shoot")]
 public class SimpleShoot : MonoBehaviour
@@ -14,6 +12,7 @@ public class SimpleShoot : MonoBehaviour
     [SerializeField] private Animator gunAnimator;
     [SerializeField] private Transform barrelLocation;
     [SerializeField] private Transform casingExitLocation;
+    [SerializeField] private AudioSource shoot;
 
     [Header("Settings")]
     [Tooltip("Specify time to destory the casing object")] [SerializeField] private float destroyTimer = 2f;
@@ -37,6 +36,7 @@ public class SimpleShoot : MonoBehaviour
         {
             //Calls animation on the gun that has the relevant animation events that will fire
             gunAnimator.SetTrigger("Fire");
+            shoot.Play();
         }
     }
 
