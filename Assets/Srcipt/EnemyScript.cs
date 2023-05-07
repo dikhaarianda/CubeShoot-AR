@@ -4,16 +4,27 @@ using UnityEngine.UI;
 public class EnemyScript : MonoBehaviour
 {
     [SerializeField] private GameObject[] enemy;
+    [SerializeField] private GameObject GameOverUI;
+    [SerializeField] private GameObject ImageTarget;
     [SerializeField] private float SpawnEnemyDuration;
     [SerializeField] private float KillEnemyDuration;
     [SerializeField] private Text updateScore;
+    [SerializeField] private Text timeText;
+    [SerializeField] private Text ScoreUI;
 
-    public bool isEnemyDestroy;
-    public int score = 0;
+    private float elapsedTime;
+    private float gamePlayTime;
 
-    private float elapsedTime = 0f;
     private int currentIndex;
     private int previousIndex;
+    private int highScore;
+    public int score;
+
+    public bool isEnemyDestroy;
+
+    private void Start() {
+        highScore = PlayerPrefs.GetInt("HighScore");
+    }
 
     private void Update()
     {
@@ -37,7 +48,21 @@ public class EnemyScript : MonoBehaviour
                 enemy[currentIndex].SetActive(false);
             }
         }
-        updateScore.text = score.ToString();
+
+        gamePlayTime += Time.deltaTime;
+        if (gamePlayTime >= 60f)
+        {
+            ScoreUI.text = "Your Score \n" + score.ToString();
+            if (score > highScore)
+            {
+                PlayerPrefs.SetInt("HighScore", score);
+            }
+
+            GameOverUI.SetActive(true);
+            ImageTarget.SetActive(false);
+        }
+        UpdateTimeText();
+        updateScore.text = "Score: \n" + score.ToString();
     }
 
     private void randomGenerator()
@@ -51,5 +76,14 @@ public class EnemyScript : MonoBehaviour
 
         enemy[currentIndex].SetActive(true);
         previousIndex = currentIndex;
+    }
+
+    private void UpdateTimeText()
+    {
+        int minutes = Mathf.FloorToInt(gamePlayTime / 60f);
+        int seconds = Mathf.FloorToInt(gamePlayTime % 60f);
+        string timeString = string.Format("{0:00}:{1:00}", minutes, seconds);
+
+        timeText.text = timeString;
     }
 }

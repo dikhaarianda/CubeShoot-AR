@@ -4,8 +4,7 @@ using UnityEngine.UI;
 
 public class TargetTracker : DefaultObserverEventHandler
 {
-    [SerializeField] private GameObject HandGun;
-    [SerializeField] private GameObject InGameUI;
+    [SerializeField] private GameObject PlayerObject;
     [SerializeField] private GameObject StartingUI;
     [SerializeField] private EnemyScript enemyScript;
     [SerializeField] private Text countdownText;
@@ -22,8 +21,7 @@ public class TargetTracker : DefaultObserverEventHandler
     {
         base.OnTrackingLost();
         enemyScript.enabled = false;
-        HandGun.SetActive(false);
-        InGameUI.SetActive(false);
+        PlayerObject.SetActive(false);
         StartingUI.SetActive(true);
     }
 
@@ -42,7 +40,6 @@ public class TargetTracker : DefaultObserverEventHandler
 
         countdownText.gameObject.SetActive(false);
         enemyScript.enabled = true;
-        HandGun.SetActive(true);
-        InGameUI.SetActive(true);
+        PlayerObject.SetActive(true);
     }
 }
