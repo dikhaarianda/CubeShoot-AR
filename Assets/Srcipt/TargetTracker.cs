@@ -6,6 +6,7 @@ public class TargetTracker : DefaultObserverEventHandler
 {
     [SerializeField] private GameObject PlayerObject;
     [SerializeField] private GameObject StartingUI;
+    [SerializeField] private GameObject PauseUI;
     [SerializeField] private EnemyScript enemyScript;
     [SerializeField] private Text countdownText;
 
@@ -13,7 +14,6 @@ public class TargetTracker : DefaultObserverEventHandler
     {
         base.OnTrackingFound();
         StartCoroutine(CountdownCoroutine());
-        countdownText.gameObject.SetActive(true);
         StartingUI.SetActive(false);
     }
 
@@ -25,10 +25,24 @@ public class TargetTracker : DefaultObserverEventHandler
         StartingUI.SetActive(true);
     }
 
+    public void setGameStart()
+    {
+        StartCoroutine(CountdownCoroutine());
+        PauseUI.SetActive(false);
+    }
+
+    public void setGameStop()
+    {
+        enemyScript.enabled = false;
+        PlayerObject.SetActive(false);
+        PauseUI.SetActive(true);
+    }
+
     IEnumerator CountdownCoroutine()
     {
         int count = 3;
 
+        countdownText.gameObject.SetActive(true);
         while (count > 0)
         {
             countdownText.text = count.ToString();
