@@ -6,7 +6,7 @@ public class EnemyScript : MonoBehaviour
     [SerializeField] private GameObject[] enemy;
     [SerializeField] private GameObject GameOverUI;
     [SerializeField] private GameObject ImageTarget;
-
+    [SerializeField] private GameObject btPause;
     [SerializeField] private float SpawnEnemyDuration;
     [SerializeField] private float KillEnemyDuration;
     [SerializeField] private Text updateScore;
@@ -62,6 +62,7 @@ public class EnemyScript : MonoBehaviour
 
             GameOverUI.SetActive(true);
             ImageTarget.SetActive(false);
+            btPause.SetActive(false);
         }
         UpdateTimeText();
         updateScore.text = "Score: \n" + score.ToString();
